@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Summer",
+  "version": "1.0",
+  "description": "Изменяет стиль на летний, добавляет кнопку",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://kai.ru/*", "https://abiturientu.kai.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
