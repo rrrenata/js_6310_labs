@@ -28,7 +28,6 @@ function addSummerMode() {
         if (!pageWrapper) return;
 
         if (!enabled) {
-            // --- Выключение летнего режима ---
             pageWrapper.style.backgroundColor = '';
             pageWrapper.style.color = '';
             pageWrapper.style.fontSize = '';
@@ -52,7 +51,6 @@ function addSummerMode() {
                 input.style.color = '';
             });
 
-            // children: сбросим стили дочерних элементов блока новостей
             if (newsBox && newsBox.children.length) {
                 Array.from(newsBox.children).forEach(child => {
                     child.style.padding = '';
@@ -63,7 +61,6 @@ function addSummerMode() {
             }
 
         } else {
-            // --- Включение летнего режима ---
             pageWrapper.style.backgroundColor = '#fff9c4';
             pageWrapper.style.color = '#333';
 
@@ -85,8 +82,6 @@ function addSummerMode() {
                 input.style.border = '1px solid #ff6d00';
                 input.style.color = '#333';
             });
-
-            // --- Сложный селектор ---
             const highlightedItems = document.querySelectorAll(
                 '.news_box .news_item.news_item--highlight, .main_slider_holder .slide.active'
             );
@@ -96,7 +91,6 @@ function addSummerMode() {
                 item.style.padding = '6px';
             });
 
-            // children: изменим первые 3 дочерних элемента блока новостей
             if (newsBox && newsBox.children.length) {
                 Array.from(newsBox.children).slice(0, 3).forEach(child => {
                     child.style.padding = '8px';
@@ -105,8 +99,6 @@ function addSummerMode() {
                     child.style.borderRadius = '4px';
                 });
             }
-
-            // parentElement: добавим эффект подсветки родителю кнопки
             const toggleButton = document.getElementById('summer-btn');
             if (toggleButton && toggleButton.parentElement) {
                 toggleButton.parentElement.style.transition = 'all 0.3s';
@@ -141,16 +133,10 @@ function addSummerMode() {
             margin-left: 6px;
             border-radius: 4px;
         `;
-
-        // загрузка состояния из localStorage
         let saved = localStorage.getItem('kai_summer');
         let enabled = saved === '1';
-
-        // применяем состояние
         applySummer(enabled);
         button.title = enabled ? 'Летний режим включён' : 'Летний режим выключен';
-
-        // обработчик клика
         button.addEventListener('click', () => {
             enabled = !enabled;
             localStorage.setItem('kai_summer', enabled ? '1' : '0');
